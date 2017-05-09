@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mine Sweeper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src='lib/Quintus/quintus.js'></script>
+    <script src='lib/Quintus/quintus_2d.js'></script>
+    <script src='lib/Quintus/quintus_anim.js'></script>
+    <script src='lib/Quintus/quintus_audio.js'></script>
+    <script src='lib/Quintus/quintus_input.js'></script>
+    <script src='lib/Quintus/quintus_scenes.js'></script>
+    <script src='lib/Quintus/quintus_sprites.js'></script>
+    <script src='lib/Quintus/quintus_tmx.js'></script>
+    <script src='lib/Quintus/quintus_touch.js'></script>
+    <script src='lib/Quintus/quintus_ui.js'></script>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/videopopup.css" media="screen" />
+</head>
+<body style="background-color: white;">
+<div data-role="main" class="ui-content">
+    <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all ui-icon-check ui-btn-icon-left">Options</a>
+
+    <div data-role="popup" id="myPopup" class="ui-content" style="min-width:250px;">
+        <form method="post" action="/action_page_post.php">
+            <div>
+                <h3>Velikost pole:</h3>
+                <fieldset data-role="controlgroup">
+                    <label for="Sbig">Velká</label>
+                    <input type="radio" name="Size" id="Sbig" class="Size" value="1" data-mini="true" checked="checked" onclick="hide()">
+                    <label for="SMedium">Střední</label>
+                    <input type="radio" name="Size" id="SMedium" class="Size" value="1" data-mini="true" onclick="hide()">
+                    <label for="SSmall">Malá</label>
+                    <input type="radio" name="Size" id="SSmall" class="Size" value="1" data-mini="true" onclick="hide()">
+                    <label for="Udef">Vlastní</label>
+                    <input type="radio" name="Size" id="Udef" class="Size" value="1" data-mini="true" onclick="show()">
+                    <script>
+                        function show() {
+                            $('#UserDefined').css('display', 'block');
+                        }
+                        function hide() {
+                            $('#UserDefined').css('display', 'none');
+                        }
+                    </script>
+                </fieldset >
+                <fieldset id="UserDefined" style=" display:none;">
+                    <label for="xCount">Počet na řádek:</label>
+                    <input type="number" name="Xcount" id="Xcount" placeholder="Počet na řádek" data-mini="true" pattern="[0-9]">
+                    <label for="Ycount" >Počet na sloupec:</label>
+                    <input type="number" name="Ycount" id="Ycount" placeholder="Počet na sloupec" data-mini="true" pattern="[0-9]">
+                    <label for="Bombcount" >Počet Bomb:</label>
+                    <input type="number" name="Bombcount" id="Bombcount" placeholder="Počet Bomb" data-mini="true" pattern="[0-9]">
+                </fieldset>
+                <input type="submit" data-inline="true" value="Save" onclick="saveToLocal()">
+            </div>
+        </form>
+    </div>
+</div>
+    <script src='lib/App.js'> </script>
+
+    <a href="javascript:void(0)" id="video1" style=" display:none;">-- open video --</a>
+    <div id="vidBox">
+        <div id="videCont">
+            <video id="v1" controls>
+                <source src="endGame.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#vidBox').VideoPopUp({
+                backgroundColor: "#17212a",
+                opener: "video1",
+                maxweight: "340",
+                idvideo: "v1"
+            });
+        });
+
+        document.getElementById('v1').addEventListener('ended',myHandler,false);
+        function myHandler(e) {
+            $("#vidBox").hide();
+        }
+    </script>
+
+
+
+</body>
+</html>
